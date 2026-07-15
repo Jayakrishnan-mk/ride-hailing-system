@@ -1,0 +1,131 @@
+{
+    "info": {
+        "name": "Ride Hailing Allocation",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1. Update Driver Location",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"driverId\": \"driver-1\",\n  \"longitude\": 12.9716,\n  \"latitude\": 77.5946\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3000/drivers/location",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "drivers",
+                        "location"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "2. Request Ride",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"longitude\": 12.9716,\n  \"latitude\": 77.5946\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3000/rides",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "rides"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "3. Accept Ride",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"driverId\": \"driver-1\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3000/rides/:id/accept",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "rides",
+                        ":id",
+                        "accept"
+                    ],
+                    "variable": [
+                        {
+                            "key": "id",
+                            "value": "REPLACE_WITH_UUID_FROM_REQUEST_RIDE"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "4. Find Nearby Drivers (Test)",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3000/drivers/nearby?longitude=12.9716&latitude=77.5946&radius=5",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "drivers",
+                        "nearby"
+                    ],
+                    "query": [
+                        {
+                            "key": "longitude",
+                            "value": "12.9716"
+                        },
+                        {
+                            "key": "latitude",
+                            "value": "77.5946"
+                        },
+                        {
+                            "key": "radius",
+                            "value": "5"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
