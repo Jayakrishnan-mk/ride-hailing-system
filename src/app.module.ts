@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RedisModule } from './redis/redis.module';
 import { DriverModule } from './driver/driver.module';
+import { RideModule } from './ride/ride.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { DriverModule } from './driver/driver.module';
     }),
     RedisModule,
     DriverModule,
+    RideModule,
   ],
   controllers: [],
   providers: [],
