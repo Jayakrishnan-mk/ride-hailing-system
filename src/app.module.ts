@@ -6,12 +6,7 @@ import { DriverModule } from './driver/driver.module';
 
 @Module({
   imports: [
-    // Global Configuration Module
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-
-    // TypeORM PostgreSQL Setup
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -22,16 +17,14 @@ import { DriverModule } from './driver/driver.module';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
+        synchronize: true, 
       }),
       inject: [ConfigService],
     }),
-
     RedisModule,
-
     DriverModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
