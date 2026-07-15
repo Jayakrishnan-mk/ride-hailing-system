@@ -1,5 +1,5 @@
 import { Process, Processor } from '@nestjs/bull';
-import { Job } from 'bull';
+import type { Job } from 'bull';
 import { RideService } from './ride.service';
 import { Logger } from '@nestjs/common';
 

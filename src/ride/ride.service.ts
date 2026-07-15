@@ -5,7 +5,7 @@ import { Ride, RideState } from './ride.entity';
 import { RedisService } from '../redis/redis.service';
 import { DriverService } from '../driver/driver.service';
 import { InjectQueue } from '@nestjs/bull';
-import { Queue } from 'bull';
+import type { Queue } from 'bull';
 
 @Injectable()
 export class RideService {
@@ -86,7 +86,7 @@ export class RideService {
         { id: rideId, state: RideState.SEARCHING },
         { state: RideState.TIMEOUT }
       );
-      if (result.affected > 0) {
+      if (result.affected && result.affected > 0) {
         this.logger.warn(`Ride ${rideId} timed out after ${this.MAX_RETRIES} attempts`);
       }
       return;
