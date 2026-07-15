@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BullModule } from '@nestjs/bull';
 import { RedisModule } from './redis/redis.module';
 import { DriverModule } from './driver/driver.module';
 import { RideModule } from './ride/ride.module';
@@ -22,11 +23,20 @@ import { RideModule } from './ride/ride.module';
       }),
       inject: [ConfigService],
     }),
+    // Configuration - Bull Queue Redis connection
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        redis: {
+          host: configService.get('REDIS_HOST'),
+          port: configService.get('REDIS_PORT'),
+        },
+      }),
+      inject: [ConfigService],
+    }),
     RedisModule,
     DriverModule,
     RideModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
