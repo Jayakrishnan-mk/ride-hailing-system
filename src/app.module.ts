@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RedisModule } from './redis/redis.module';
+import { DriverModule } from './driver/driver.module';
 
 @Module({
   imports: [
@@ -27,6 +28,8 @@ import { RedisModule } from './redis/redis.module';
     }),
 
     RedisModule,
+
+    DriverModule,
   ],
   controllers: [],
   providers: [],
